@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum BoardRow: CaseIterable {
+enum BoardRow: Int, CaseIterable {
     case top
     case middle
     case bottom
 }
 
-enum BoardColumn: CaseIterable {
+enum BoardColumn: Int, CaseIterable {
     case left
     case center
     case right
@@ -25,32 +25,36 @@ enum BoardValue {
     case circle
 }
 
-fileprivate struct BoardPosition: Hashable {
-    let row: BoardRow
-    let column: BoardColumn
-}
-
 class Board {
-    private var cells: Dictionary<BoardPosition, BoardValue> = Dictionary()
+    private lazy var cells: Array<Array<BoardValue>> = {
+        var rows = Array<Array<BoardValue>>()
+        for row in BoardRow.allCases {
+            var columns = Array<BoardValue>()
+            for column in BoardColumn.allCases {
+                columns.append(.empty)
+            }
+            rows.append(columns)
+        }
+        return rows
+    }()
     
     init() {
         reset()
     }
     
     func reset() {
-        cells.removeAll()
         for row in BoardRow.allCases {
             for column in BoardColumn.allCases {
-                cells[BoardPosition(row: row, column: column)] = .empty
+                cells[row.rawValue][column.rawValue] = .empty
             }
         }
     }
     
     func value(row: BoardRow, column: BoardColumn) -> BoardValue {
-        return cells[BoardPosition(row: row, column: column)]!  // there is always a value, we can force unwrap here
+        return cells[row.rawValue][column.rawValue]  // there is always a value, we can force unwrap here
     }
     
     func setValue(value: BoardValue, row: BoardRow, column: BoardColumn) {
-        cells[BoardPosition(row: row, column: column)] = value
+        cells[row.rawValue][column.rawValue] = value
     }
 }
