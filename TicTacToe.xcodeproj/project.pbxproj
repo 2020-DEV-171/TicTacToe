@@ -13,8 +13,10 @@
 		64EC94C1254318D100B50EBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64EC94BF254318D100B50EBF /* Main.storyboard */; };
 		64EC94C3254318D300B50EBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64EC94C2254318D300B50EBF /* Assets.xcassets */; };
 		64EC94C6254318D300B50EBF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64EC94C4254318D300B50EBF /* LaunchScreen.storyboard */; };
-		64EC94D1254318D300B50EBF /* TicTacToeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94D0254318D300B50EBF /* TicTacToeTests.swift */; };
 		64EC94DC254318D300B50EBF /* TicTacToeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94DB254318D300B50EBF /* TicTacToeUITests.swift */; };
+		64EC94ED254624EC00B50EBF /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94EC254624EC00B50EBF /* Board.swift */; };
+		64EC94EE254624EC00B50EBF /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94EC254624EC00B50EBF /* Board.swift */; };
+		64EC94F3254627C600B50EBF /* BoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94F2254627C600B50EBF /* BoardTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,11 +46,12 @@
 		64EC94C5254318D300B50EBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64EC94C7254318D300B50EBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64EC94CC254318D300B50EBF /* TicTacToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		64EC94D0254318D300B50EBF /* TicTacToeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeTests.swift; sourceTree = "<group>"; };
 		64EC94D2254318D300B50EBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64EC94D7254318D300B50EBF /* TicTacToeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		64EC94DB254318D300B50EBF /* TicTacToeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeUITests.swift; sourceTree = "<group>"; };
 		64EC94DD254318D300B50EBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64EC94EC254624EC00B50EBF /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		64EC94F2254627C600B50EBF /* BoardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +109,7 @@
 				64EC94C2254318D300B50EBF /* Assets.xcassets */,
 				64EC94C4254318D300B50EBF /* LaunchScreen.storyboard */,
 				64EC94C7254318D300B50EBF /* Info.plist */,
+				64EC94EC254624EC00B50EBF /* Board.swift */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -113,8 +117,8 @@
 		64EC94CF254318D300B50EBF /* TicTacToeTests */ = {
 			isa = PBXGroup;
 			children = (
-				64EC94D0254318D300B50EBF /* TicTacToeTests.swift */,
 				64EC94D2254318D300B50EBF /* Info.plist */,
+				64EC94F2254627C600B50EBF /* BoardTests.swift */,
 			);
 			path = TicTacToeTests;
 			sourceTree = "<group>";
@@ -260,6 +264,7 @@
 			files = (
 				64EC94BE254318D000B50EBF /* ViewController.swift in Sources */,
 				64EC94BA254318D000B50EBF /* AppDelegate.swift in Sources */,
+				64EC94ED254624EC00B50EBF /* Board.swift in Sources */,
 				64EC94BC254318D000B50EBF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +273,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64EC94D1254318D300B50EBF /* TicTacToeTests.swift in Sources */,
+				64EC94EE254624EC00B50EBF /* Board.swift in Sources */,
+				64EC94F3254627C600B50EBF /* BoardTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
