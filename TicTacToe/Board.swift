@@ -26,19 +26,17 @@ enum BoardValue {
 }
 
 class Board {
-    private lazy var cells: Array<Array<BoardValue>> = {
-        var rows = Array<Array<BoardValue>>()
-        for row in BoardRow.allCases {
-            var columns = Array<BoardValue>()
-            for column in BoardColumn.allCases {
-                columns.append(.empty)
-            }
-            rows.append(columns)
-        }
-        return rows
-    }()
+    private var cells: Array<Array<BoardValue>>
     
     init() {
+        cells = Array<Array<BoardValue>>()
+        for _ in BoardRow.allCases {
+            var columns = Array<BoardValue>()
+            for _ in BoardColumn.allCases {
+                columns.append(.empty)
+            }
+            cells.append(columns)
+        }
         reset()
     }
     
