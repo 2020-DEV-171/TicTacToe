@@ -20,6 +20,8 @@
 		64EC94FB25462FE500B50EBF /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94FA25462FE500B50EBF /* Game.swift */; };
 		64EC95232547702000B50EBF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 64EC95222547702000B50EBF /* README.md */; };
 		64EC95282547724800B50EBF /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC95272547724800B50EBF /* GameTests.swift */; };
+		64FF10CB25477DBD009F60F8 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94FA25462FE500B50EBF /* Game.swift */; };
+		64FF10D025477EC6009F60F8 /* TestGameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FF10CF25477EC6009F60F8 /* TestGameDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,7 @@
 		64EC94FA25462FE500B50EBF /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		64EC95222547702000B50EBF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		64EC95272547724800B50EBF /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
+		64FF10CF25477EC6009F60F8 /* TestGameDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestGameDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,7 @@
 				64EC94D2254318D300B50EBF /* Info.plist */,
 				64EC94F2254627C600B50EBF /* BoardTests.swift */,
 				64EC95272547724800B50EBF /* GameTests.swift */,
+				64FF10CF25477EC6009F60F8 /* TestGameDelegate.swift */,
 			);
 			path = TicTacToeTests;
 			sourceTree = "<group>";
@@ -287,6 +291,8 @@
 				64EC94EE254624EC00B50EBF /* Board.swift in Sources */,
 				64EC95282547724800B50EBF /* GameTests.swift in Sources */,
 				64EC94F3254627C600B50EBF /* BoardTests.swift in Sources */,
+				64FF10CB25477DBD009F60F8 /* Game.swift in Sources */,
+				64FF10D025477EC6009F60F8 /* TestGameDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
