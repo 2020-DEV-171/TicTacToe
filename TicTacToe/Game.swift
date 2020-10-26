@@ -47,9 +47,6 @@ class Game {
         [(.bottom, .left), (.middle, .center), (.top, .right)]
     ]
     
-    init() {
-    }
-    
     func start() {
         finished = false
         board.reset()
