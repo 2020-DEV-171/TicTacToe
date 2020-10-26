@@ -46,6 +46,21 @@ enum TestGameDelegateEvent: Equatable {
     case turnChanged(Player)
 }
 
+extension TestGameDelegateEvent: CustomDebugStringConvertible {
+    
+    var debugDescription: String {
+        switch self {
+        case .upated(let value, let row, let column):
+            return "updated(\(value), \(row), \(column))"
+        case .finished(let condition):
+            return "finished(\(condition))"
+        case .turnChanged(let player):
+            return "turnChanged(\(player))"
+        }
+    }
+
+}
+
 extension GameFinishCondition: Equatable {
     public static func == (lhs: GameFinishCondition, rhs: GameFinishCondition) -> Bool {
         switch (lhs, rhs) {

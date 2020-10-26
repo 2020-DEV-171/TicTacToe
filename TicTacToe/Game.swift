@@ -25,15 +25,33 @@ protocol GameDelegate: class {
 }
 
 class Game {
-    private let board: Board = Board()
-    private(set) var currentPlayer: Player = .circle
+    fileprivate let board: Board = Board()
+    fileprivate var currentPlayer: Player = .circle
+    fileprivate var finished  = true
     
     var delegate: GameDelegate?
+    
+    fileprivate let winningSequences: [[(BoardRow, BoardColumn)]] = [
+        // vertical
+        [(.top, .left), (.middle, .left), (.bottom, .left)],
+        [(.top, .center), (.middle, .center), (.bottom, .center)],
+        [(.top, .right), (.middle, .right), (.bottom, .right)],
+
+        // horizontal
+        [(.top, .left), (.top, .center), (.top, .right)],
+        [(.middle, .left), (.middle, .center), (.middle, .right)],
+        [(.bottom, .left), (.bottom, .center), (.bottom, .right)],
+
+        // diagonal
+        [(.top, .left), (.middle, .center), (.bottom, .right)],
+        [(.bottom, .left), (.middle, .center), (.top, .right)]
+    ]
     
     init() {
     }
     
     func start() {
+        finished = false
         board.reset()
         for row in BoardRow.allCases {
             for column in BoardColumn.allCases {
@@ -44,16 +62,66 @@ class Game {
     }
     
     func play(row: BoardRow, column: BoardColumn) {
-        if board.value(row: row, column: column) == .empty {
-            board.setValue(value: currentPlayer.boardValue(), row: row, column: column)
-            delegate?.game(self, updatedValue: currentPlayer.boardValue(), at: row, column)
+        if !finished {
+            if board.value(row: row, column: column) == .empty {
+                board.setValue(value: currentPlayer.boardValue(), row: row, column: column)
+                delegate?.game(self, updatedValue: currentPlayer.boardValue(), at: row, column)
+            }
+            
+            if let condition = isGameFinished() {
+                finished = true
+                delegate?.game(self, finishedWithCondition: condition)
+            } else {
+                setCurrentPlayer(currentPlayer.otherPlayer())
+            }
         }
-        // check win conditions
-        setCurrentPlayer(currentPlayer.otherPlayer())
     }
     
-    func isGameFinished() -> Bool {
-        return false
+    fileprivate func isGameFinished() -> GameFinishCondition? {
+
+        // first test if somebody had a winning sequence
+        for sequence in winningSequences {
+            if let uniqueValue = uniqueValueInWinningSequence(sequence) {
+                if case .cross = uniqueValue {
+                    return .won(.cross)
+                }
+                else if case .circle = uniqueValue {
+                    return .won(.circle)
+                }
+            }
+        }
+        
+        // otherwise check if are still empty cells to play
+        if emptyPositionCount() == 0 {
+            return .tie
+        } else {
+            return nil
+        }
+    }
+
+    // return the unique value, if any, for a winning sequence. If there are multiple values, return nil
+    fileprivate func uniqueValueInWinningSequence(_ sequence: [(BoardRow, BoardColumn)]) -> BoardValue? {
+        let valuesInSequence = sequence.map { (row, column) -> BoardValue in
+            return board.value(row: row, column: column)
+        }
+        let uniqueValues = Set(valuesInSequence)
+        if uniqueValues.count == 1 {
+            return uniqueValues.first
+        } else {
+            return nil
+        }
+    }
+    
+    fileprivate func emptyPositionCount() -> Int {
+        var count: Int = 0
+        for row in BoardRow.allCases {
+            for column in BoardColumn.allCases {
+                if board.value(row: row, column: column) == .empty {
+                    count += 1
+                }
+            }
+        }
+        return count
     }
     
     fileprivate func setCurrentPlayer(_ newPlayer: Player) {

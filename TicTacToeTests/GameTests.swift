@@ -10,7 +10,7 @@ import XCTest
 
 class GameTests: XCTestCase {
 
-    func testGameStart() {
+    func testStart() {
         let game = Game()
         let expectedEvents: [TestGameDelegateEvent] = [
             .upated(.empty, .top, .left), .upated(.empty, .top, .center), .upated(.empty, .top, .right),
@@ -29,7 +29,7 @@ class GameTests: XCTestCase {
         }
     }
     
-    func testGamePlay() {
+    func testPlay() {
         let game = Game()
         let expectedEvents: [TestGameDelegateEvent] = [
             .upated(.cross, .top, .left),
@@ -42,6 +42,36 @@ class GameTests: XCTestCase {
         game.delegate = delegate
         game.play(row: .top, column: .left)
         game.play(row: .top, column: .center)
+        waitForExpectations(timeout: 0.05) { (error) in
+            if let _ = error {
+                XCTFail("Delegate not called")
+            }
+            XCTAssertEqual(expectedEvents, delegate.events)
+        }
+    }
+    
+    func testCrossWon() {
+        let game = Game()
+        let expectedEvents: [TestGameDelegateEvent] = [
+            .upated(.cross, .top, .left),
+            .turnChanged(.circle),
+            .upated(.circle, .top, .center),
+            .turnChanged(.cross),
+            .upated(.cross, .middle, .left),
+            .turnChanged(.circle),
+            .upated(.circle, .middle, .center),
+            .turnChanged(.cross),
+            .upated(.cross, .bottom, .left),
+            .finished(.won(.cross))
+        ]
+        let delegate = TestGameDelegate(expectation: expectation(description: "board is initialised and first turn is set to cross"), expectedEventCount: expectedEvents.count)
+        game.start()
+        game.delegate = delegate
+        game.play(row: .top, column: .left)
+        game.play(row: .top, column: .center)
+        game.play(row: .middle, column: .left)
+        game.play(row: .middle, column: .center)
+        game.play(row: .bottom, column: .left)
         waitForExpectations(timeout: 0.05) { (error) in
             if let _ = error {
                 XCTFail("Delegate not called")
