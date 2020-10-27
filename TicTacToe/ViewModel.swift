@@ -10,6 +10,7 @@ import Foundation
 protocol ViewModelDelegate: class {
     func setCurrentPlayer(name: String)
     func setBoardButtonTitle(title: String, at position: Position)
+    func showAlert(message: String)
 }
 
 class ViewModel {
@@ -27,6 +28,9 @@ class ViewModel {
     
     func play(at position: Position) {
         game.play(position: position)
+    }
+    
+    func alertDismissed() {
     }
 }
 

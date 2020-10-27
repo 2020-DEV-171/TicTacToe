@@ -43,4 +43,23 @@ class ViewModelTests: XCTestCase {
             XCTAssertEqual(expectedEvents, delegate.events)
         }
     }
+    
+    func testViewModelAlert() {
+        let viewModel = ViewModel()
+        let expectedEvents: [TestViewModelDelegateEvent] = [.setBoardButtonTitle("X", .bottomLeft), .showAlert("Player X Won!")]
+        let delegate = TestViewModelDelegate(expectation: expectation(description: "current player name is set to X"), expectedEventCount: 1)
+        viewModel.start()
+        viewModel.play(at: .topLeft)
+        viewModel.play(at: .topCenter)
+        viewModel.play(at: .middleLeft)
+        viewModel.play(at: .middleCenter)
+        viewModel.delegate = delegate
+        viewModel.play(at: .bottomLeft)
+        waitForExpectations(timeout: 0.05) { (error) in
+            if let _ = error {
+                XCTFail("Delegate not called")
+            }
+            XCTAssertEqual(expectedEvents, delegate.events)
+        }
+    }
 }

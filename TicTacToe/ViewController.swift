@@ -125,6 +125,14 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: ViewModelDelegate {
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+            self.viewModel.alertDismissed()
+        }))
+        present(alertController, animated: true)
+    }
+    
     func setBoardButtonTitle(title: String, at position: Position) {
         if let button = buttons[position] {
             button.setTitle(title, for: .normal)

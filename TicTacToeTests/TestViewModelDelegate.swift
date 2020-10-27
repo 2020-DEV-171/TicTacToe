@@ -8,6 +8,10 @@
 import Foundation
 
 class TestViewModelDelegate: TestDelegate<TestViewModelDelegateEvent>, ViewModelDelegate {
+    func showAlert(message: String) {
+        eventArrived(event: .showAlert(message))
+    }
+    
     func setBoardButtonTitle(title: String, at position: Position) {
         eventArrived(event: .setBoardButtonTitle(title, position))
     }
@@ -20,6 +24,7 @@ class TestViewModelDelegate: TestDelegate<TestViewModelDelegateEvent>, ViewModel
 enum TestViewModelDelegateEvent: Equatable {
     case setCurentPlayer(String)
     case setBoardButtonTitle(String, Position)
+    case showAlert(String)
 }
 
 extension TestViewModelDelegateEvent: CustomDebugStringConvertible {
@@ -30,6 +35,8 @@ extension TestViewModelDelegateEvent: CustomDebugStringConvertible {
             return "setCurentPlayer(\(name))"
         case .setBoardButtonTitle(let title, let position):
             return "setBoardButtonTitle(\(title),\(position))"
+        case .showAlert(let message):
+            return "showAlert(\(message))"
         }
     }
 
