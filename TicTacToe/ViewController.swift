@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     private let viewModel = ViewModel()
     
     private let currentPlayerLabel: UILabel = UILabel()
-    private let startButton: UIButton = UIButton(type: .custom)
+    private let restartButton: UIButton = UIButton(type: .custom)
     private var buttons: Dictionary<Position, UIButton> = Dictionary()
     private let board: UIView = UIView()
 
@@ -20,33 +20,33 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         viewModel.delegate = self
         
-        createViews()
+        setupViews()
         connectViews()
         
         viewModel.start()
     }
     
-    private func createViews() {
+    private func setupViews() {
         
-        createCurrentPlayerLabel()
-        createBoard()
-        createStartButton()
+        setupCurrentPlayerLabel()
+        setupBoard()
+        setupRestartButton()
 
-        createContainer()
+        setupContainer()
     }
 
-    private func createCurrentPlayerLabel() {
+    private func setupCurrentPlayerLabel() {
         currentPlayerLabel.text = " "
     }
     
-    private func createStartButton() {
-        startButton.setTitleColor(.black, for: .normal)
-        startButton.backgroundColor = .init(white: 0.9, alpha: 1.0)
-        startButton.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
-        startButton.setTitle("Restart", for: .normal)
+    private func setupRestartButton() {
+        restartButton.setTitleColor(.black, for: .normal)
+        restartButton.backgroundColor = .init(white: 0.9, alpha: 1.0)
+        restartButton.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
+        restartButton.setTitle("Restart", for: .normal)
     }
     
-    private func createBoard() {
+    private func setupBoard() {
         
         let positions: [[Position]] = [
             [.topLeft, .topCenter, .topRight],
@@ -91,14 +91,14 @@ class ViewController: UIViewController {
         return button
     }
     
-    private func createContainer() {
+    private func setupContainer() {
         let container = UIStackView()
         container.translatesAutoresizingMaskIntoConstraints = false
         container.axis = .vertical
         container.spacing = 10.0
         container.addArrangedSubview(currentPlayerLabel)
         container.addArrangedSubview(board)
-        container.addArrangedSubview(startButton)
+        container.addArrangedSubview(restartButton)
         view.addSubview(container)
         container.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10.0).isActive = true
         container.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10.0).isActive = true
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
     }
     
     private func connectViews() {
-        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        restartButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         for button in buttons.values {
             button.addTarget(self, action: #selector(boardButtonTapped(sender:)), for: .touchUpInside)
         }
