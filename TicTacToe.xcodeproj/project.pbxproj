@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		646BDD0D254838AB0097FAEE /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646BDD0C254838AB0097FAEE /* Coordinates.swift */; };
+		646BDD12254839180097FAEE /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646BDD11254839180097FAEE /* ViewModelTests.swift */; };
+		646BDD162548391B0097FAEE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FF10D425479081009F60F8 /* ViewModel.swift */; };
+		646BDD1B254839500097FAEE /* TestViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646BDD1A254839500097FAEE /* TestViewModelDelegate.swift */; };
+		646BDD1F25483A310097FAEE /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646BDD0C254838AB0097FAEE /* Coordinates.swift */; };
+		646BDD2425483B070097FAEE /* TestDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646BDD2325483B070097FAEE /* TestDelegate.swift */; };
 		64EC94BA254318D000B50EBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94B9254318D000B50EBF /* AppDelegate.swift */; };
 		64EC94BC254318D000B50EBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94BB254318D000B50EBF /* SceneDelegate.swift */; };
 		64EC94BE254318D000B50EBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94BD254318D000B50EBF /* ViewController.swift */; };
@@ -22,6 +28,7 @@
 		64EC95282547724800B50EBF /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC95272547724800B50EBF /* GameTests.swift */; };
 		64FF10CB25477DBD009F60F8 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC94FA25462FE500B50EBF /* Game.swift */; };
 		64FF10D025477EC6009F60F8 /* TestGameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FF10CF25477EC6009F60F8 /* TestGameDelegate.swift */; };
+		64FF10D525479081009F60F8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FF10D425479081009F60F8 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		646BDD0C254838AB0097FAEE /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		646BDD11254839180097FAEE /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
+		646BDD1A254839500097FAEE /* TestViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModelDelegate.swift; sourceTree = "<group>"; };
+		646BDD2325483B070097FAEE /* TestDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDelegate.swift; sourceTree = "<group>"; };
 		64EC94B6254318D000B50EBF /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64EC94B9254318D000B50EBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64EC94BB254318D000B50EBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +72,7 @@
 		64EC95222547702000B50EBF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		64EC95272547724800B50EBF /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		64FF10CF25477EC6009F60F8 /* TestGameDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestGameDelegate.swift; sourceTree = "<group>"; };
+		64FF10D425479081009F60F8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,13 +126,15 @@
 				64EC95222547702000B50EBF /* README.md */,
 				64EC94B9254318D000B50EBF /* AppDelegate.swift */,
 				64EC94BB254318D000B50EBF /* SceneDelegate.swift */,
-				64EC94BD254318D000B50EBF /* ViewController.swift */,
 				64EC94BF254318D100B50EBF /* Main.storyboard */,
 				64EC94C2254318D300B50EBF /* Assets.xcassets */,
 				64EC94C4254318D300B50EBF /* LaunchScreen.storyboard */,
 				64EC94C7254318D300B50EBF /* Info.plist */,
+				646BDD0C254838AB0097FAEE /* Coordinates.swift */,
 				64EC94EC254624EC00B50EBF /* Board.swift */,
 				64EC94FA25462FE500B50EBF /* Game.swift */,
+				64FF10D425479081009F60F8 /* ViewModel.swift */,
+				64EC94BD254318D000B50EBF /* ViewController.swift */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -132,6 +146,9 @@
 				64EC94F2254627C600B50EBF /* BoardTests.swift */,
 				64EC95272547724800B50EBF /* GameTests.swift */,
 				64FF10CF25477EC6009F60F8 /* TestGameDelegate.swift */,
+				646BDD11254839180097FAEE /* ViewModelTests.swift */,
+				646BDD1A254839500097FAEE /* TestViewModelDelegate.swift */,
+				646BDD2325483B070097FAEE /* TestDelegate.swift */,
 			);
 			path = TicTacToeTests;
 			sourceTree = "<group>";
@@ -278,8 +295,10 @@
 			files = (
 				64EC94BE254318D000B50EBF /* ViewController.swift in Sources */,
 				64EC94FB25462FE500B50EBF /* Game.swift in Sources */,
+				646BDD0D254838AB0097FAEE /* Coordinates.swift in Sources */,
 				64EC94BA254318D000B50EBF /* AppDelegate.swift in Sources */,
 				64EC94ED254624EC00B50EBF /* Board.swift in Sources */,
+				64FF10D525479081009F60F8 /* ViewModel.swift in Sources */,
 				64EC94BC254318D000B50EBF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,9 +309,14 @@
 			files = (
 				64EC94EE254624EC00B50EBF /* Board.swift in Sources */,
 				64EC95282547724800B50EBF /* GameTests.swift in Sources */,
+				646BDD12254839180097FAEE /* ViewModelTests.swift in Sources */,
 				64EC94F3254627C600B50EBF /* BoardTests.swift in Sources */,
+				646BDD2425483B070097FAEE /* TestDelegate.swift in Sources */,
 				64FF10CB25477DBD009F60F8 /* Game.swift in Sources */,
+				646BDD1B254839500097FAEE /* TestViewModelDelegate.swift in Sources */,
+				646BDD1F25483A310097FAEE /* Coordinates.swift in Sources */,
 				64FF10D025477EC6009F60F8 /* TestGameDelegate.swift in Sources */,
+				646BDD162548391B0097FAEE /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

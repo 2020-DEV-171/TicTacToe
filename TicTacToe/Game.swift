@@ -25,13 +25,13 @@ protocol GameDelegate: class {
 }
 
 class Game {
-    fileprivate let board: Board = Board()
-    fileprivate var currentPlayer: Player = .circle
-    fileprivate var finished  = true
+    private let board: Board = Board()
+    private var currentPlayer: Player = .circle
+    private var finished  = true
     
-    var delegate: GameDelegate?
+    weak var delegate: GameDelegate?
     
-    fileprivate let winningSequences: [[(BoardRow, BoardColumn)]] = [
+    private let winningSequences: [[(BoardRow, BoardColumn)]] = [
         // vertical
         [(.top, .left), (.middle, .left), (.bottom, .left)],
         [(.top, .center), (.middle, .center), (.bottom, .center)],
@@ -74,7 +74,7 @@ class Game {
         }
     }
     
-    fileprivate func isGameFinished() -> GameFinishCondition? {
+    private func isGameFinished() -> GameFinishCondition? {
 
         // first test if somebody had a winning sequence
         for sequence in winningSequences {
@@ -97,7 +97,7 @@ class Game {
     }
 
     // return the unique value, if any, for a winning sequence. If there are multiple values, return nil
-    fileprivate func uniqueValueInWinningSequence(_ sequence: [(BoardRow, BoardColumn)]) -> BoardValue? {
+    private func uniqueValueInWinningSequence(_ sequence: [(BoardRow, BoardColumn)]) -> BoardValue? {
         let valuesInSequence = sequence.map { (row, column) -> BoardValue in
             return board.value(row: row, column: column)
         }
@@ -109,7 +109,7 @@ class Game {
         }
     }
     
-    fileprivate func emptyPositionCount() -> Int {
+    private func emptyPositionCount() -> Int {
         var count: Int = 0
         for row in BoardRow.allCases {
             for column in BoardColumn.allCases {
@@ -121,7 +121,7 @@ class Game {
         return count
     }
     
-    fileprivate func setCurrentPlayer(_ newPlayer: Player) {
+    private func setCurrentPlayer(_ newPlayer: Player) {
         currentPlayer = newPlayer
         delegate?.game(self, turnChangedTo: currentPlayer)
     }
