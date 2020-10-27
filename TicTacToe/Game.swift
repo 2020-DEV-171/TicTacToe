@@ -56,11 +56,11 @@ class Game {
         setCurrentPlayer(.cross)
     }
     
-    func play(position: Position) {
+    func play(at: Position) {
         if !finished {
-            if board.value(position: position) == .empty {
-                board.setValue(value: currentPlayer.boardValue(), position: position)
-                delegate?.game(self, updatedValue: currentPlayer.boardValue(), at: position)
+            if board.value(position: at) == .empty {
+                board.setValue(value: currentPlayer.boardValue(), position: at)
+                delegate?.game(self, updatedValue: currentPlayer.boardValue(), at: at)
             }
             
             if let condition = isGameFinished() {

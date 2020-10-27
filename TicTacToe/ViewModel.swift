@@ -27,7 +27,7 @@ class ViewModel {
     }
     
     func play(at position: Position) {
-        game.play(position: position)
+        game.play(at: position)
     }
     
     func alertDismissed() {

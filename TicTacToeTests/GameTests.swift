@@ -40,8 +40,8 @@ class GameTests: XCTestCase {
         let delegate = TestGameDelegate(expectation: expectation(description: "board is updated and turn changes when playing"), expectedEventCount: expectedEvents.count)
         game.start()
         game.delegate = delegate
-        game.play(position: .topLeft)
-        game.play(position: .topCenter)
+        game.play(at: .topLeft)
+        game.play(at: .topCenter)
         waitForExpectations(timeout: 0.05) { (error) in
             if let _ = error {
                 XCTFail("Delegate not called")
@@ -67,11 +67,11 @@ class GameTests: XCTestCase {
         let delegate = TestGameDelegate(expectation: expectation(description: "win condition is reached when playing a winning game"), expectedEventCount: expectedEvents.count)
         game.start()
         game.delegate = delegate
-        game.play(position: .topLeft)
-        game.play(position: .topCenter)
-        game.play(position: .middleLeft)
-        game.play(position: .middleCenter)
-        game.play(position: .bottomLeft)
+        game.play(at: .topLeft)
+        game.play(at: .topCenter)
+        game.play(at: .middleLeft)
+        game.play(at: .middleCenter)
+        game.play(at: .bottomLeft)
         waitForExpectations(timeout: 0.05) { (error) in
             if let _ = error {
                 XCTFail("Delegate not called")
@@ -105,15 +105,15 @@ class GameTests: XCTestCase {
         let delegate = TestGameDelegate(expectation: expectation(description: "tie condition is reached when exhausting all possible moves without a win"), expectedEventCount: expectedEvents.count)
         game.start()
         game.delegate = delegate
-        game.play(position: .topLeft)
-        game.play(position: .topRight)
-        game.play(position: .middleCenter)
-        game.play(position: .bottomRight)
-        game.play(position: .middleRight)
-        game.play(position: .middleLeft)
-        game.play(position: .bottomCenter)
-        game.play(position: .topCenter)
-        game.play(position: .bottomLeft)
+        game.play(at: .topLeft)
+        game.play(at: .topRight)
+        game.play(at: .middleCenter)
+        game.play(at: .bottomRight)
+        game.play(at: .middleRight)
+        game.play(at: .middleLeft)
+        game.play(at: .bottomCenter)
+        game.play(at: .topCenter)
+        game.play(at: .bottomLeft)
         waitForExpectations(timeout: 0.05) { (error) in
             if let _ = error {
                 XCTFail("Delegate not called")
@@ -148,15 +148,15 @@ class GameTests: XCTestCase {
         game.delegate = delegate
         
         // play cross win game
-        game.play(position: .topLeft)
-        game.play(position: .topCenter)
-        game.play(position: .middleLeft)
-        game.play(position: .middleCenter)
-        game.play(position: .bottomLeft)
+        game.play(at: .topLeft)
+        game.play(at: .topCenter)
+        game.play(at: .middleLeft)
+        game.play(at: .middleCenter)
+        game.play(at: .bottomLeft)
         // keey playing even after finishing
-        game.play(position: .bottomCenter)
-        game.play(position: .topRight)
-        game.play(position: .topCenter)
+        game.play(at: .bottomCenter)
+        game.play(at: .topRight)
+        game.play(at: .topCenter)
         // restart game
         game.start()
         waitForExpectations(timeout: 0.05) { (error) in
