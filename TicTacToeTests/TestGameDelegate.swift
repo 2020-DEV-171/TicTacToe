@@ -8,17 +8,8 @@
 import XCTest
 @testable import TicTacToe
 
-class TestGameDelegate: GameDelegate {
+class TestGameDelegate: TestDelegate<TestGameDelegateEvent>, GameDelegate {
     
-    fileprivate let expectation: XCTestExpectation
-    fileprivate let expectedEventCount: Int
-    var events: [TestGameDelegateEvent] = []
-
-    init(expectation: XCTestExpectation, expectedEventCount: Int) {
-        self.expectation = expectation
-        self.expectedEventCount = expectedEventCount
-    }
-
     func game(_ game: Game, updatedValue value: BoardValue, at row: BoardRow, _ column: BoardColumn) {
         eventArrived(event: .upated(value, row, column))
     }
@@ -29,13 +20,6 @@ class TestGameDelegate: GameDelegate {
 
     func game(_ game: Game, turnChangedTo player: Player) {
         eventArrived(event: .turnChanged(player))
-    }
-
-    fileprivate func eventArrived(event: TestGameDelegateEvent) {
-        events.append(event)
-        if events.count == expectedEventCount {
-            expectation.fulfill()
-        }
     }
 }
 
