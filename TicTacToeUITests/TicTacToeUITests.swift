@@ -9,34 +9,38 @@ import XCTest
 
 class TicTacToeUITests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
+    func testWin() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
 
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        app.buttons["topLeft"].tap()
+        app.buttons["topCenter"].tap()
+        app.buttons["middleLeft"].tap()
+        app.buttons["middleCenter"].tap()
+        app.buttons["bottomLeft"].tap()
+
+        XCTAssertTrue(app.alerts.element.staticTexts["Player X Won!"].waitForExistence(timeout: 1.0), "should display a win alert")
     }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    func testCurrentPlayerUpdate() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+
+        XCTAssertTrue(app.staticTexts["Current player: X"].waitForExistence(timeout: 0.1), "should display cross as current player")
+        app.buttons["topLeft"].tap()
+        XCTAssertTrue(app.staticTexts["Current player: O"].waitForExistence(timeout: 0.1), "should display circle as current player")
+        app.buttons["topCenter"].tap()
+        XCTAssertTrue(app.staticTexts["Current player: X"].waitForExistence(timeout: 0.1), "should display cross as current player")
+    }
+
+    func testPlay() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+
+        app.buttons["topLeft"].tap()
+        XCTAssertTrue(app.buttons["topLeft"].staticTexts["X"].waitForExistence(timeout: 0.1), "should display circle as current player")
     }
 }

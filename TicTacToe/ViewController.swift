@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         
         // create all the buttons and put them in the dictionary
         for position in positions.flatMap({$0}) {
-            buttons[position] = createBoardButton()
+            buttons[position] = createBoardButton(for: position)
         }
         
         // now create board
@@ -81,12 +81,13 @@ class ViewController: UIViewController {
         rowsStackView.bottomAnchor.constraint(equalTo: board.bottomAnchor).isActive = true
     }
     
-    private func createBoardButton() -> UIButton {
+    private func createBoardButton(for position: Position) -> UIButton {
         let button = UIButton(type: .custom)
         button.layer.borderWidth = 1.0
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1.0).isActive = true
         button.setTitleColor(.black, for: .normal)
+        button.accessibilityLabel = "\(position)"
         return button
     }
     
