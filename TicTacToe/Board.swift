@@ -7,18 +7,6 @@
 
 import Foundation
 
-enum BoardRow: Int, CaseIterable {
-    case top
-    case middle
-    case bottom
-}
-
-enum BoardColumn: Int, CaseIterable {
-    case left
-    case center
-    case right
-}
-
 enum BoardValue {
     case empty
     case cross
@@ -26,33 +14,23 @@ enum BoardValue {
 }
 
 class Board {
-    private var cells: Array<Array<BoardValue>>
+    private var cells: Dictionary<Position, BoardValue> = Dictionary()
     
     init() {
-        cells = Array<Array<BoardValue>>()
-        for _ in BoardRow.allCases {
-            var columns = Array<BoardValue>()
-            for _ in BoardColumn.allCases {
-                columns.append(.empty)
-            }
-            cells.append(columns)
-        }
         reset()
     }
     
     func reset() {
-        for row in BoardRow.allCases {
-            for column in BoardColumn.allCases {
-                cells[row.rawValue][column.rawValue] = .empty
-            }
+        for position in Position.allCases {
+            cells[position] = .empty
         }
     }
     
-    func value(row: BoardRow, column: BoardColumn) -> BoardValue {
-        return cells[row.rawValue][column.rawValue]  // there is always a value, we can force unwrap here
+    func value(position: Position) -> BoardValue {
+        return cells[position]!  // there is always a value, we can force unwrap here
     }
     
-    func setValue(value: BoardValue, row: BoardRow, column: BoardColumn) {
-        cells[row.rawValue][column.rawValue] = value
+    func setValue(value: BoardValue, position: Position) {
+        cells[position] = value
     }
 }

@@ -26,7 +26,7 @@ class ViewModel {
 }
 
 extension ViewModel: GameDelegate {
-    func game(_ game: Game, updatedValue value: BoardValue, at row: BoardRow, _ column: BoardColumn) {
+    func game(_ game: Game, updatedValue value: BoardValue, at position: Position) {
         
     }
     

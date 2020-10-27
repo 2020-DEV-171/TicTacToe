@@ -13,9 +13,9 @@ class GameTests: XCTestCase {
     func testStart() {
         let game = Game()
         let expectedEvents: [TestGameDelegateEvent] = [
-            .upated(.empty, .top, .left), .upated(.empty, .top, .center), .upated(.empty, .top, .right),
-            .upated(.empty, .middle, .left), .upated(.empty, .middle, .center), .upated(.empty, .middle, .right),
-            .upated(.empty, .bottom, .left), .upated(.empty, .bottom, .center), .upated(.empty, .bottom, .right),
+            .upated(.empty, .topLeft), .upated(.empty, .topCenter), .upated(.empty, .topRight),
+            .upated(.empty, .middleLeft), .upated(.empty, .middleCenter), .upated(.empty, .middleRight),
+            .upated(.empty, .bottomLeft), .upated(.empty, .bottomCenter), .upated(.empty, .bottomRight),
             .turnChanged(.cross)
         ]
         let delegate = TestGameDelegate(expectation: expectation(description: "board is initialised and first turn is set to cross"), expectedEventCount: expectedEvents.count)
@@ -32,16 +32,16 @@ class GameTests: XCTestCase {
     func testPlay() {
         let game = Game()
         let expectedEvents: [TestGameDelegateEvent] = [
-            .upated(.cross, .top, .left),
+            .upated(.cross, .topLeft),
             .turnChanged(.circle),
-            .upated(.circle, .top, .center),
+            .upated(.circle, .topCenter),
             .turnChanged(.cross)
         ]
         let delegate = TestGameDelegate(expectation: expectation(description: "board is updated and turn changes when playing"), expectedEventCount: expectedEvents.count)
         game.start()
         game.delegate = delegate
-        game.play(row: .top, column: .left)
-        game.play(row: .top, column: .center)
+        game.play(position: .topLeft)
+        game.play(position: .topCenter)
         waitForExpectations(timeout: 0.05) { (error) in
             if let _ = error {
                 XCTFail("Delegate not called")
@@ -53,25 +53,25 @@ class GameTests: XCTestCase {
     func testCrossWon() {
         let game = Game()
         let expectedEvents: [TestGameDelegateEvent] = [
-            .upated(.cross, .top, .left),
+            .upated(.cross, .topLeft),
             .turnChanged(.circle),
-            .upated(.circle, .top, .center),
+            .upated(.circle, .topCenter),
             .turnChanged(.cross),
-            .upated(.cross, .middle, .left),
+            .upated(.cross, .middleLeft),
             .turnChanged(.circle),
-            .upated(.circle, .middle, .center),
+            .upated(.circle, .middleCenter),
             .turnChanged(.cross),
-            .upated(.cross, .bottom, .left),
+            .upated(.cross, .bottomLeft),
             .finished(.won(.cross))
         ]
         let delegate = TestGameDelegate(expectation: expectation(description: "win condition is reached when playing a winning game"), expectedEventCount: expectedEvents.count)
         game.start()
         game.delegate = delegate
-        game.play(row: .top, column: .left)
-        game.play(row: .top, column: .center)
-        game.play(row: .middle, column: .left)
-        game.play(row: .middle, column: .center)
-        game.play(row: .bottom, column: .left)
+        game.play(position: .topLeft)
+        game.play(position: .topCenter)
+        game.play(position: .middleLeft)
+        game.play(position: .middleCenter)
+        game.play(position: .bottomLeft)
         waitForExpectations(timeout: 0.05) { (error) in
             if let _ = error {
                 XCTFail("Delegate not called")
@@ -83,37 +83,37 @@ class GameTests: XCTestCase {
     func testTie() {
         let game = Game()
         let expectedEvents: [TestGameDelegateEvent] = [
-            .upated(.cross, .top, .left),
+            .upated(.cross, .topLeft),
             .turnChanged(.circle),
-            .upated(.circle, .top, .right),
+            .upated(.circle, .topRight),
             .turnChanged(.cross),
-            .upated(.cross, .middle, .center),
+            .upated(.cross, .middleCenter),
             .turnChanged(.circle),
-            .upated(.circle, .bottom, .right),
+            .upated(.circle, .bottomRight),
             .turnChanged(.cross),
-            .upated(.cross, .middle, .right),
+            .upated(.cross, .middleRight),
             .turnChanged(.circle),
-            .upated(.circle, .middle, .left),
+            .upated(.circle, .middleLeft),
             .turnChanged(.cross),
-            .upated(.cross, .bottom, .center),
+            .upated(.cross, .bottomCenter),
             .turnChanged(.circle),
-            .upated(.circle, .top, .center),
+            .upated(.circle, .topCenter),
             .turnChanged(.cross),
-            .upated(.cross, .bottom, .left),
+            .upated(.cross, .bottomLeft),
             .finished(.tie)
         ]
         let delegate = TestGameDelegate(expectation: expectation(description: "tie condition is reached when exhausting all possible moves without a win"), expectedEventCount: expectedEvents.count)
         game.start()
         game.delegate = delegate
-        game.play(row: .top, column: .left)
-        game.play(row: .top, column: .right)
-        game.play(row: .middle, column: .center)
-        game.play(row: .bottom, column: .right)
-        game.play(row: .middle, column: .right)
-        game.play(row: .middle, column: .left)
-        game.play(row: .bottom, column: .center)
-        game.play(row: .top, column: .center)
-        game.play(row: .bottom, column: .left)
+        game.play(position: .topLeft)
+        game.play(position: .topRight)
+        game.play(position: .middleCenter)
+        game.play(position: .bottomRight)
+        game.play(position: .middleRight)
+        game.play(position: .middleLeft)
+        game.play(position: .bottomCenter)
+        game.play(position: .topCenter)
+        game.play(position: .bottomLeft)
         waitForExpectations(timeout: 0.05) { (error) in
             if let _ = error {
                 XCTFail("Delegate not called")
@@ -126,21 +126,21 @@ class GameTests: XCTestCase {
         let game = Game()
         let expectedEvents: [TestGameDelegateEvent] = [
             // cross win game
-            .upated(.cross, .top, .left),
+            .upated(.cross, .topLeft),
             .turnChanged(.circle),
-            .upated(.circle, .top, .center),
+            .upated(.circle, .topCenter),
             .turnChanged(.cross),
-            .upated(.cross, .middle, .left),
+            .upated(.cross, .middleLeft),
             .turnChanged(.circle),
-            .upated(.circle, .middle, .center),
+            .upated(.circle, .middleCenter),
             .turnChanged(.cross),
-            .upated(.cross, .bottom, .left),
+            .upated(.cross, .bottomLeft),
             .finished(.won(.cross)),
 
             // board initialization and first turn
-            .upated(.empty, .top, .left), .upated(.empty, .top, .center), .upated(.empty, .top, .right),
-            .upated(.empty, .middle, .left), .upated(.empty, .middle, .center), .upated(.empty, .middle, .right),
-            .upated(.empty, .bottom, .left), .upated(.empty, .bottom, .center), .upated(.empty, .bottom, .right),
+            .upated(.empty, .topLeft), .upated(.empty, .topCenter), .upated(.empty, .topRight),
+            .upated(.empty, .middleLeft), .upated(.empty, .middleCenter), .upated(.empty, .middleRight),
+            .upated(.empty, .bottomLeft), .upated(.empty, .bottomCenter), .upated(.empty, .bottomRight),
             .turnChanged(.cross)
         ]
         let delegate = TestGameDelegate(expectation: expectation(description: "after finishing a game, call delegate only after restarting a game"), expectedEventCount: expectedEvents.count)
@@ -148,15 +148,15 @@ class GameTests: XCTestCase {
         game.delegate = delegate
         
         // play cross win game
-        game.play(row: .top, column: .left)
-        game.play(row: .top, column: .center)
-        game.play(row: .middle, column: .left)
-        game.play(row: .middle, column: .center)
-        game.play(row: .bottom, column: .left)
+        game.play(position: .topLeft)
+        game.play(position: .topCenter)
+        game.play(position: .middleLeft)
+        game.play(position: .middleCenter)
+        game.play(position: .bottomLeft)
         // keey playing even after finishing
-        game.play(row: .bottom, column: .center)
-        game.play(row: .top, column: .right)
-        game.play(row: .top, column: .center)
+        game.play(position: .bottomCenter)
+        game.play(position: .topRight)
+        game.play(position: .topCenter)
         // restart game
         game.start()
         waitForExpectations(timeout: 0.05) { (error) in

@@ -10,8 +10,8 @@ import XCTest
 
 class TestGameDelegate: TestDelegate<TestGameDelegateEvent>, GameDelegate {
     
-    func game(_ game: Game, updatedValue value: BoardValue, at row: BoardRow, _ column: BoardColumn) {
-        eventArrived(event: .upated(value, row, column))
+    func game(_ game: Game, updatedValue value: BoardValue, at position: Position) {
+        eventArrived(event: .upated(value, position))
     }
 
     func game(_ game: Game, finishedWithCondition condition: GameFinishCondition) {
@@ -25,7 +25,7 @@ class TestGameDelegate: TestDelegate<TestGameDelegateEvent>, GameDelegate {
 
 
 enum TestGameDelegateEvent: Equatable {
-    case upated(BoardValue, BoardRow, BoardColumn)
+    case upated(BoardValue, Position)
     case finished(GameFinishCondition)
     case turnChanged(Player)
 }
@@ -34,8 +34,8 @@ extension TestGameDelegateEvent: CustomDebugStringConvertible {
     
     var debugDescription: String {
         switch self {
-        case .upated(let value, let row, let column):
-            return "updated(\(value), \(row), \(column))"
+        case .upated(let value, let position):
+            return "updated(\(value), \(position))"
         case .finished(let condition):
             return "finished(\(condition))"
         case .turnChanged(let player):

@@ -12,27 +12,23 @@ class BoardTests: XCTestCase {
 
     func testBoardInitialization() {
         let board = Board()
-        for row in BoardRow.allCases {
-            for column in BoardColumn.allCases {
-                XCTAssertEqual(board.value(row: row, column: column), .empty, "Value at (\(row),\(column)) should be empty")
-            }
+        for position in Position.allCases {
+            XCTAssertEqual(board.value(position: position), .empty, "Value at \(position) should be empty")
         }
     }
 
     func testBoardReset() {
         let board = Board()
         board.reset()
-        for row in BoardRow.allCases {
-            for column in BoardColumn.allCases {
-                XCTAssertEqual(board.value(row: row, column: column), .empty, "Value at (\(row),\(column)) should be empty")
-            }
+        for position in Position.allCases {
+            XCTAssertEqual(board.value(position: position), .empty, "Value at \(position) should be empty")
         }
     }
 
     func testBoardSet() {
         let board = Board()
-        board.setValue(value: .circle, row: .top, column: .left)
-        XCTAssertEqual(board.value(row: .top, column: .left), .circle, "Value at (top,left) should be circle")
+        board.setValue(value: .circle, position: .topLeft)
+        XCTAssertEqual(board.value(position: .topLeft), .circle, "Value at topLeft should be circle")
     }
 
 }
