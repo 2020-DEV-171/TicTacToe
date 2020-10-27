@@ -40,6 +40,12 @@ extension ViewModel: GameDelegate {
     }
     
     func game(_ game: Game, finishedWithCondition condition: GameFinishCondition) {
+        switch condition {
+        case .won(let player):
+            delegate?.showAlert(message: "Player \(player.name) Won!")
+        case .tie:
+            delegate?.showAlert(message: "Tie!")
+        }
     }
     
     func game(_ game: Game, turnChangedTo player: Player) {
