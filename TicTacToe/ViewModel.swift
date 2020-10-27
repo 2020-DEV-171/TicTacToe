@@ -31,6 +31,7 @@ class ViewModel {
     }
     
     func alertDismissed() {
+        game.start()
     }
 }
 
