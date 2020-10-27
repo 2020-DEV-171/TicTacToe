@@ -22,6 +22,8 @@ class ViewController: UIViewController {
         
         createViews()
         connectViews()
+        
+        viewModel.start()
     }
     
     private func createViews() {
@@ -41,7 +43,7 @@ class ViewController: UIViewController {
         startButton.setTitleColor(.black, for: .normal)
         startButton.backgroundColor = .init(white: 0.9, alpha: 1.0)
         startButton.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
-        startButton.setTitle("Start", for: .normal)
+        startButton.setTitle("Restart", for: .normal)
     }
     
     private func createBoard() {
@@ -84,6 +86,7 @@ class ViewController: UIViewController {
         button.layer.borderWidth = 1.0
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1.0).isActive = true
+        button.setTitleColor(.black, for: .normal)
         return button
     }
     
@@ -103,14 +106,31 @@ class ViewController: UIViewController {
     
     private func connectViews() {
         startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        for button in buttons.values {
+            button.addTarget(self, action: #selector(boardButtonTapped(sender:)), for: .touchUpInside)
+        }
     }
     
-    @objc fileprivate func startButtonTapped() {
+    @objc private func startButtonTapped() {
         viewModel.start()
+    }
+    
+    @objc private func boardButtonTapped(sender: UIButton) {
+        for (position, button) in buttons {
+            if button == sender {
+                viewModel.play(at: position)
+            }
+        }
     }
 }
 
 extension ViewController: ViewModelDelegate {
+    func setBoardButtonTitle(title: String, at position: Position) {
+        if let button = buttons[position] {
+            button.setTitle(title, for: .normal)
+        }
+    }
+    
     func setCurrentPlayer(name: String) {
         currentPlayerLabel.text = name
     }

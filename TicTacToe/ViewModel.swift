@@ -9,6 +9,7 @@ import Foundation
 
 protocol ViewModelDelegate: class {
     func setCurrentPlayer(name: String)
+    func setBoardButtonTitle(title: String, at position: Position)
 }
 
 class ViewModel {
@@ -23,11 +24,15 @@ class ViewModel {
     func start() {
         game.start()
     }
+    
+    func play(at position: Position) {
+        game.play(position: position)
+    }
 }
 
 extension ViewModel: GameDelegate {
     func game(_ game: Game, updatedValue value: BoardValue, at position: Position) {
-        
+        delegate?.setBoardButtonTitle(title: value.title, at: position)
     }
     
     func game(_ game: Game, finishedWithCondition condition: GameFinishCondition) {
@@ -41,6 +46,19 @@ extension ViewModel: GameDelegate {
 extension Player {
     var name: String {
         switch self {
+        case .cross:
+            return "X"
+        case .circle:
+            return "O"
+        }
+    }
+}
+
+extension BoardValue {
+    var title: String {
+        switch self {
+        case .empty:
+            return ""
         case .cross:
             return "X"
         case .circle:
