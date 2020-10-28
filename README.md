@@ -4,6 +4,7 @@
 Just open the .xcodeproj and run it to play, or run the test.
 
 ## Implementation details
+Not a complete explanation of the code, just some pointers to get around. 
 
 ### Board.swift
 Mainly contains `Board`, a simple tic tac toe board implemented internally with arrays, each cell can be empty or contain a circle or a cross. There is no logic to prevent updating an already claimed cell, and there's no concept of turns or players, or winning conditions. Cell coordinates are implemented using `enums` to avoid indexing with `Int`s and checking bounds.
