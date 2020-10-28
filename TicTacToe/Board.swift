@@ -35,6 +35,12 @@ class Board {
     }
     
     func emptyPositionCount() -> Int {
-        return 0
+        return cells.values.reduce(0) { (result, value) -> Int in
+            if case .empty = value {
+                return result + 1
+            } else {
+                return result
+            }
+        }
     }
 }
