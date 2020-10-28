@@ -33,4 +33,8 @@ class Board {
     func setValue(value: BoardValue, position: Position) {
         cells[position] = value
     }
+    
+    func emptyPositionCount() -> Int {
+        return 0
+    }
 }

@@ -87,7 +87,7 @@ class Game {
         }
         
         // otherwise check if are still empty cells to play
-        if emptyPositionCount() == 0 {
+        if board.emptyPositionCount() == 0 {
             return .tie
         } else {
             return nil
@@ -105,16 +105,6 @@ class Game {
         } else {
             return nil
         }
-    }
-    
-    private func emptyPositionCount() -> Int {
-        var count: Int = 0
-        for position in Position.allCases {
-            if board.value(position: position) == .empty {
-                count += 1
-            }
-        }
-        return count
     }
     
     private func setCurrentPlayer(_ newPlayer: Player) {

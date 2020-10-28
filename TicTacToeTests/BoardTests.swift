@@ -31,4 +31,14 @@ class BoardTests: XCTestCase {
         XCTAssertEqual(board.value(position: .topLeft), .circle, "Value at topLeft should be circle")
     }
 
+    func testBoardEmptyPositionCount() {
+        let board = Board()
+        var expectedEmptyPositionCount = 9
+        XCTAssertEqual(board.emptyPositionCount(), expectedEmptyPositionCount)
+        for position in Position.allCases {
+            board.setValue(value: .cross, position: position)
+            expectedEmptyPositionCount -= 1
+            XCTAssertEqual(board.emptyPositionCount(), expectedEmptyPositionCount)
+        }
+    }
 }
